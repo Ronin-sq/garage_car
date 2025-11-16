@@ -29,7 +29,7 @@ def generate_launch_description():
     bridge_params = os.path.join(
         simulation_package,
         "config",
-        "bridge_config.yaml",
+        "bridge_config_gazebo11.yaml",
     )
 
     # Define the robot_state_publisher node
@@ -40,7 +40,7 @@ def generate_launch_description():
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="screen",
-        parameters=[{"robot_description": robot_desc}],
+        parameters=[{"robot_description": robot_desc, "use_sim_time": True}],
     )
 
     # Define the RViz node
@@ -50,6 +50,7 @@ def generate_launch_description():
             executable="rviz2",
             name="rviz2",
             output="screen",
+            parameters=[{"use_sim_time": True}],
             arguments=["-d", rviz_config_file],
         )
     else:
@@ -58,6 +59,7 @@ def generate_launch_description():
             executable="rviz2",
             name="rviz2",
             output="screen",
+            parameters=[{"use_sim_time": True}],
         )
 
     # Define the Gazebo node
@@ -83,6 +85,9 @@ def generate_launch_description():
             sdf_file,
             "-name",
             "robot",
+            "-x", "0",
+            "-y", "0",
+            "-z", "0.1"
         ],
         output="screen",
     )
@@ -90,6 +95,7 @@ def generate_launch_description():
     start_gazebo_ros_bridge_cmd = Node(
         package="ros_gz_bridge",
         executable="parameter_bridge",
+        parameters=[{"use_sim_time": True}],
         arguments=[
             "--ros-args",
             "-p",
