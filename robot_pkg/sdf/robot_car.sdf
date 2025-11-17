@@ -406,7 +406,7 @@
       </inertia>
     </inertial>
   </link>
-  <joint name="base_link_to_left_wheel" type="revolute">
+  <joint name="base_link_to_left_wheel" type="continuous">
     <pose relative_to='left_wheel'>0 0 0 0 0 0 </pose>
     <parent>base_link</parent>
     <child>left_wheel</child>

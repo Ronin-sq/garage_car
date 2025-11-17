@@ -1,4 +1,4 @@
-<robot name="robot">
+<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <link name="base_footprint"></link>
   <joint name="base_joint" type="fixed">
     <parent link="base_footprint" />
@@ -65,7 +65,21 @@
                 </noise>
             </imu>
         </sensor>
-      </link>
+  </link>
+  <gazebo reference="imu">
+    <sensor type="imu" name="imu_sensor">
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <ros>
+          <namespace>/demo</namespace>
+          <remapping>~/out:=imu</remapping>
+        </ros>
+        <initial_orientation_as_reference>false</initial_orientation_as_reference>
+      </plugin>
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+    </sensor>
+  </gazebo>
   <joint name="base_link_to_camera" type="fixed">
     <parent link="base_link" />
     <child link="camera" />
@@ -113,7 +127,38 @@
                 </noise>
             </camera>
         </sensor>
-      </link>
+  </link>
+  <gazebo reference="camera">
+    <sensor type="camera" name="camera_sensor">
+      <update_rate>30.0</update_rate>
+      <camera name="head">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>600</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <ros>
+          <namespace>/demo</namespace>
+        </ros>
+        <camera_name>camera</camera_name>
+        <frame_name>camera</frame_name>
+        <hack_baseline>0.07</hack_baseline>
+      </plugin>
+    </sensor>
+  </gazebo>
+
   <joint name="base_link_to_front_chaster" type="fixed">
     <parent link="base_link" />
     <child link="front_chaster" />
@@ -194,7 +239,6 @@
       <mass value="1" />
       <inertia ixx="0.3333333333333333" ixy="0" ixz="0" iyy="0.5" iyz="0" izz="0.3333333333333333" />
     </inertial>
-
         <sensor type="lidar" name="lidar">
             <always_on>true</always_on>
             <update_rate>5</update_rate>
@@ -220,7 +264,41 @@
                 </noise>
             </ray>
         </sensor>
-      </link>
+  </link>
+  <gazebo reference="lidar">
+    <sensor type="ray" name="lidar_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>0</min_angle>
+            <max_angle>6.28</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.12</min>
+          <max>3.5</max>
+          <resolution>0.015</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="laser_controller" filename="libgazebo_ros_laser.so">
+        <ros>
+          <namespace>/demo</namespace>
+        </ros>
+        <topicName>scan</topicName>
+        <frameName>lidar</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
   <joint name="base_link_to_left_wheel" type="continuous">
     <parent link="base_link" />
     <child link="left_wheel" />
@@ -304,5 +382,25 @@
       <inertia ixx="0.3333333333333333" ixy="0" ixz="0" iyy="0.5" iyz="0" izz="0.3333333333333333" />
     </inertial>
   </link>
+  <ros2_control name="diff_drive_controller" type="system"> 
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+    <joint name="base_link_to_left_wheel">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="base_link_to_right_wheel">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+  </ros2_control>
+  <gazebo>
+    <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+      <parameters>$(find robot_pkg)/config/controller.yaml</parameters>
+    </plugin>
+  </gazebo>
 </robot>
 

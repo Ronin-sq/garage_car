@@ -13,6 +13,8 @@ install(
   DIRECTORY 
     sdf
     urdf
+    launch
+    config
   DESTINATION share/${PROJECT_NAME}/
 )
 
