@@ -15,6 +15,7 @@ install(
     urdf
     launch
     config
+    world
   DESTINATION share/${PROJECT_NAME}/
 )
 
