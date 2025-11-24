@@ -28,5 +28,13 @@
             <child link="${caster_name}_link"/>
             <origin xyz="${xyz_offset}" rpy="0.0 0.0 0.0"/>
         </joint>
+        <gazebo reference="${caster_name}_link">
+            <!-- mu1 切向摩擦，mu2 法向摩擦 kp 刚度 kd 阻尼 -->
+            <mu1 value="0.0"/>
+            <mu2 value="0.0"/>
+            <kp value="1000000000.0"/>
+            <kd value="1.0"/>
+            <material>Gazebo/Black</material>
+        </gazebo>
     </xacro:macro>
 </robot>
