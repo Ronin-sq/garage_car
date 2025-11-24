@@ -7,7 +7,7 @@
     <xacro:include filename="$(find robot_pkg)/urdf/robot/actuator/wheel.urdf.xacro" />
     <xacro:include filename="$(find robot_pkg)/urdf/robot/actuator/caster.urdf.xacro" />
     <xacro:include filename="$(find robot_pkg)/urdf/robot/plugins/gazebo_control.xacro" />
-
+    <xacro:include filename="$(find robot_pkg)/urdf/robot/plugins/gazebo_sensor_plugins.xacro" />
     <xacro:base_link length="0.1" radius="0.05" />
     <xacro:imu_link imu_name="imu" xyz_offset="0 0 0" />
     <xacro:camera_link  xyz_offset="0.05 0 0.055" />
@@ -17,5 +17,6 @@
     <xacro:caster_link caster_name="front_caster" xyz_offset="0.04 0.0 -0.066" />
     <xacro:caster_link caster_name="back_caster" xyz_offset="-0.04 0.0 -0.066" />
     <xacro:gazebo_control_plugin separation="0.1" diameter="0.064" />
+    <xacro:gazebo_sensor_plugin />
 
 </robot>

@@ -2,6 +2,9 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:include filename="$(find robot_pkg)/urdf/robot/sensor/common_inertia.urdf.xacro"/>
     <xacro:macro name="camera_link" params = "xyz_offset">
+        <link name="camera_optical_link">
+            
+        </link>
         <link name="camera_link">
             <visual>
                 <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
@@ -23,10 +26,15 @@
             </collision>
             <xacro:box_inertia m="0.1" w="0.02" h="0.1" d="0.02" />
         </link>
-        <joint name="base_link_to_camera" type="fixed">
+        <joint name="camera_joint" type="fixed">
             <parent link="base_link"/>
             <child link="camera_link"/>
             <origin xyz="${xyz_offset}" rpy="0.0 0.0 0.0"/>
+        </joint>
+        <joint name="camera_optical_joint" type="fixed">
+            <parent link="camera_link"/>
+            <child link="camera_optical_link"/>
+            <origin xyz="${xyz_offset}" rpy="${-pi/2} 0.0 ${-pi/2}"/>
         </joint>
     </xacro:macro>
 </robot>
