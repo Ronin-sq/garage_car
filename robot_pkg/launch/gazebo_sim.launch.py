@@ -37,9 +37,35 @@ def generate_launch_description():
         output='screen',
     )
 
+    action_load_joint = launch.actions.ExecuteProcess(
+        cmd="ros2 control load_controller robot_joint_state_broadcaster --set-state active".split(" "),
+        output="screen",
+    )
+    action_load_effort_controller = launch.actions.ExecuteProcess(
+        cmd="ros2 control load_controller robot_effort_controllers --set-state active".split(" "),
+        output="screen",
+    )
+    # 加载差速控制器
+    action_load_diff_dirive_controller = launch.actions.ExecuteProcess(
+        cmd="ros2 control load_controller robot_diff_drive_controller --set-state active".split(" "),
+        output="screen",
+    )
+
     return launch.LaunchDescription([
         robot_state_publisher_node,
         action_launch_gazebo,
         spawn_entity_node,
         rviz_node,
+        launch.actions.RegisterEventHandler(
+            event_handler=launch.event_handlers.OnProcessExit(
+                target_action=spawn_entity_node,
+                on_exit=[action_load_joint],
+            )
+        ),
+        launch.actions.RegisterEventHandler(
+            event_handler=launch.event_handlers.OnProcessExit(
+                target_action=action_load_joint,
+                on_exit=[action_load_diff_dirive_controller],
+            )
+        ),
     ])

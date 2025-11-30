@@ -16,6 +16,7 @@ The robot_pkg provides:
 robot_pkg/
 ├── config/                 # Configuration files
 │   ├── controller.yaml     # ROS 2 controller configurations
+│   ├── ros2_controller.yaml# Advanced ROS 2 controller configurations
 │   ├── robot.rviz          # RViz configuration
 │   └── rviz_config.rviz    # Alternative RViz configuration
 ├── launch/                 # Launch files
@@ -71,24 +72,40 @@ ros2 launch robot_pkg robot.launch.py
 
 ## Controllers
 
-The package includes configuration for two main controllers:
+The package includes configuration for three main controllers:
 
 1. **diff_drive_controller**: Controls the differential drive system
    - Configured with left and right wheel joints
-   - Wheel separation: 0.3m
-   - Wheel radius: 0.04m
+   - Wheel separation: 0.3m (controller.yaml) or 0.1m (ros2_controller.yaml)
+   - Wheel radius: 0.04m (controller.yaml) or 0.032m (ros2_controller.yaml)
    - Publishes odometry transformations
 
 2. **joint_state_broadcaster**: Broadcasts joint states
    - Provides joint position and velocity information
 
+3. **effort_controllers**: Controls joint efforts
+   - Allows direct effort control of wheel joints
+   - Useful for custom control algorithms
+
 ## Configuration
 
-The [controller.yaml](config/controller.yaml) file contains the parameters for the ROS 2 controllers:
+The package contains two controller configuration files:
+
+### [controller.yaml](config/controller.yaml)
+Basic configuration for ROS 2 controllers:
 - Update rate: 100Hz
 - Uses simulation time
 - Differential drive controller settings
-- Odometry parameters
+- Simple odometry parameters
+
+### [ros2_controller.yaml](config/ros2_controller.yaml)
+Advanced configuration for ROS 2 controllers:
+- Update rate: 100Hz
+- Uses simulation time
+- Enhanced differential drive controller settings with more parameters
+- Effort controller configuration for direct joint control
+- Detailed covariance settings for odometry
+- Additional parameters like wheel separation multiplier and open loop control
 
 ## Dependencies
 
@@ -99,6 +116,7 @@ This package depends on the following ROS 2 packages:
 - `controller_manager` - for managing controllers
 - `diff_drive_controller` - for differential drive control
 - `joint_state_broadcaster` - for broadcasting joint states
+- `effort_controllers` - for effort-based joint control
 - `rviz2` - for visualization
 
 ## Usage
