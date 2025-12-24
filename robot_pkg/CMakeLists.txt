@@ -11,8 +11,8 @@ find_package(rclcpp REQUIRED)
 
 install(
   DIRECTORY 
-    sdf
     urdf
+    maps
     launch
     config
     world
