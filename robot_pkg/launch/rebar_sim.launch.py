@@ -9,9 +9,11 @@ from launch.substitutions import Command
 def generate_launch_description():
 
     package_path = get_package_share_directory("robot_pkg")
-    
+    world_package_path = get_package_share_directory("world_pkg")
     ronin_robot_file = os.path.join(package_path, "urdf", "robot","robot.urdf.xacro")
-    world_file = os.path.join(package_path, "world", "sim.world")
+    # world_file = os.path.join(package_path, "world", "sim.world")
+    world_file = os.path.join(world_package_path, "world", "project.world")
+
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
@@ -26,9 +28,8 @@ def generate_launch_description():
     spawn_entity_node = Node(
         package="gazebo_ros",
         executable="spawn_entity.py", 
-        arguments=["-topic", "robot_description", "-entity", "ronin_robot"],
+        arguments=["-topic", "robot_description", "-entity", "ronin_robot", "-x", "-1.3", "-y", "1.85"])
     
-    )
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',

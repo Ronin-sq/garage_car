@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <sdf version='1.7'>
-  <model name='Rebar_cross'>
+  <model name='Rebar_vertial'>
     <static>true</static>
     <link name='link_0'>
       <inertial>
@@ -15,7 +15,7 @@
         </inertia>
         <pose>0 0 0 0 -0 0</pose>
       </inertial>
-      <pose>0 0 0 1.57002 1.57 2.4e-05</pose>
+      <pose>0 0 0 0 -0 0</pose>
       <gravity>1</gravity>
       <self_collide>0</self_collide>
       <kinematic>0</kinematic>
