@@ -25,6 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
             'scan_node = algorithm_pkg.scan_node:main',
+            'nav_path_node = algorithm_pkg.nav_path_node:main',
         ],
     },
 )

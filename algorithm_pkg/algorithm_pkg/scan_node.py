@@ -208,9 +208,9 @@ class SparseBorderExtractor(Node):
                     # print(f"ronin login : compute once")
                     
                     coords = list(intersection.coords)
-                    coords = self.Adjacent_difference(coords)
+                    # coords = self.Adjacent_difference(coords)
                     # print(f"交线坐标: {coords}")
-                    if direction == -1:
+                    if direction == 1:
                         coords.reverse()
                     path_points.extend(coords)
                     direction *= -1
