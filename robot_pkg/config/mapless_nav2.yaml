@@ -1,0 +1,139 @@
+# ---------------- 新增部分 ---------------- #
+bt_navigator:
+  ros__parameters:
+    use_sim_time: True
+    global_frame: odom          # 关键：告诉行为树，我们的世界坐标系是 odom
+    robot_base_frame: base_link
+    odom_topic: /odom
+
+behavior_server:
+  ros__parameters:
+    use_sim_time: True
+    global_frame: odom          # 关键：告诉恢复动作（旋转、后退），参考 odom
+    robot_base_frame: base_link
+controller_server:
+  ros__parameters:
+    use_sim_time: True
+    controller_frequency: 20.0
+    min_x_velocity_threshold: 0.001
+    min_y_velocity_threshold: 0.5
+    min_theta_velocity_threshold: 0.001
+    failure_tolerance: 0.3
+    
+    # 这里声明了插件名字
+    progress_checker_plugin: "progress_checker"
+    goal_checker_plugins: ["general_goal_checker"] 
+    controller_plugins: ["FollowPath"]
+
+    # ---------------- 必须补充的缺失部分 ---------------- #
+    # 定义进度检查器
+    progress_checker:
+      plugin: "nav2_controller::SimpleProgressChecker"
+      required_movement_radius: 0.5 # 如果在 10 秒内没有移动 0.5 米，则认为陷入困境
+      movement_time_allowance: 10.0
+      
+    # 定义目标到达检查器
+    general_goal_checker:
+      plugin: "nav2_controller::SimpleGoalChecker"
+      xy_goal_tolerance: 0.25      # 距离终点 0.25 米内算到达
+      yaw_goal_tolerance: 0.25     # 角度偏差 0.25 弧度内算到达
+      stateful: True
+    # -------------------------------------------------- #
+
+    # 局部规划器配置 (DWB)
+    FollowPath:
+      plugin: "dwb_core::DWBLocalPlanner"
+      debug_trajectory_details: True
+      min_vel_x: 0.0
+      min_vel_y: 0.0
+      max_vel_x: 0.2
+      max_vel_y: 0.0
+      max_vel_theta: 1.0
+      min_speed_xy: 0.0
+      max_speed_xy: 0.26
+      min_speed_theta: 0.0
+      acc_lim_x: 2.5
+      acc_lim_y: 0.0
+      acc_lim_theta: 3.2
+      decel_lim_x: -2.5
+      decel_lim_y: 0.0
+      decel_lim_theta: -3.2
+      vx_samples: 20
+      vy_samples: 5
+      vtheta_samples: 20
+      sim_time: 1.7
+      linear_granularity: 0.05
+      angular_granularity: 0.025
+      transform_tolerance: 0.2
+      xy_goal_tolerance: 0.25
+      trans_stopped_velocity: 0.25
+      short_circuit_trajectory_evaluation: True
+      stateful: True
+      critics: ["RotateToGoal", "Oscillation", "BaseObstacle", "GoalAlign", "PathAlign", "PathDist", "GoalDist"]
+      BaseObstacle.scale: 0.02
+      PathAlign.scale: 32.0   
+      PathDist.scale: 32.0    # 保持很高，强迫小车贴线
+      GoalAlign.scale: 5.0    # 大幅调低！让它不要强行对齐目标方向
+      GoalDist.scale: 24.0
+      RotateToGoal.scale: 5.0 # 大幅调低！不要一到终点就强行转圈
+
+# 下面的 local_costmap 和 global_costmap 保持不变...
+
+# 局部代价地图 (基于 odom)
+local_costmap:
+  local_costmap:
+    ros__parameters:
+      update_frequency: 5.0
+      publish_frequency: 2.0
+      global_frame: odom        # 关键
+      robot_base_frame: base_link
+      use_sim_time: True
+      rolling_window: true      # 关键
+      width: 3
+      height: 3
+      resolution: 0.05
+      robot_radius: 0.07
+      plugins: ["obstacle_layer", "inflation_layer"]
+      obstacle_layer:
+        plugin: "nav2_costmap_2d::ObstacleLayer"
+        enabled: True
+        observation_sources: scan
+        scan:
+          topic: /scan
+          max_obstacle_height: 2.0
+          clearing: True
+          marking: True
+          data_type: "LaserScan"
+      inflation_layer:
+        plugin: "nav2_costmap_2d::InflationLayer"
+        cost_scaling_factor: 3.0
+        inflation_radius: 0.2
+
+# 全局代价地图 (也基于 odom 的滚动窗口)
+global_costmap:
+  global_costmap:
+    ros__parameters:
+      update_frequency: 1.0
+      publish_frequency: 1.0
+      global_frame: odom        # 关键
+      robot_base_frame: base_link
+      use_sim_time: True
+      rolling_window: true      # 关键
+      width: 10
+      height: 10
+      resolution: 0.05
+      plugins: ["obstacle_layer", "inflation_layer"]
+      obstacle_layer:
+        plugin: "nav2_costmap_2d::ObstacleLayer"
+        enabled: True
+        observation_sources: scan
+        scan:
+          topic: /scan
+          max_obstacle_height: 2.0
+          clearing: True
+          marking: True
+          data_type: "LaserScan"
+      inflation_layer:
+        plugin: "nav2_costmap_2d::InflationLayer"
+        cost_scaling_factor: 3.0
+        inflation_radius: 0.4

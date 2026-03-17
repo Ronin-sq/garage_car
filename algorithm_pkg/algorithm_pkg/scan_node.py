@@ -2,11 +2,15 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
 from visualization_msgs.msg import Marker
-from geometry_msgs.msg import Point
+from geometry_msgs.msg import Point, PoseStamped
 import numpy as np
 import alphashape  # 核心算法库
 from sklearn.cluster import DBSCAN  # 聚类算法库
 from shapely.geometry import LineString, Polygon
+from nav2_msgs.action import NavigateToPose
+from rclpy.action import ActionServer
+
+
 
 class SparseBorderExtractor(Node):
     def __init__(self):
@@ -26,6 +30,10 @@ class SparseBorderExtractor(Node):
         # 算法参数
         self.alpha = 0.1  # Alpha值越小越接近凸包，越大越紧贴点云。需根据钢筋间距调试。
         self.get_logger().info("稀疏边界提取节点已启动...")
+        # self._action_client = ActionServer(self, NavigateToPose, 'point',self.execute_callback)
+
+
+        
 
     def scan_callback(self, msg):
         # 1. 极坐标转直角坐标 (x, y)

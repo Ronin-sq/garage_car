@@ -89,7 +89,7 @@
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
     <model name='Rebar'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -300,138 +300,88 @@
       <pose>-0.127897 -0.013595 0.02 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>2045 213000000</sim_time>
-      <real_time>2025 991945925</real_time>
-      <wall_time>1771576136 409338241</wall_time>
-      <iterations>2023832</iterations>
+      <sim_time>2141 603000000</sim_time>
+      <real_time>96 549502794</real_time>
+      <wall_time>1773674964 431650344</wall_time>
+      <iterations>96390</iterations>
       <model name='Rebar'>
-        <pose>0.110276 -0.999396 0.019459 3.7e-05 0.001157 0</pose>
+        <pose>0.110276 -0.999396 0.019459 3.8e-05 0.001161 -0</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
           <pose>0.110276 -0.999396 0.019459 3.03811 1.57043 3.03811</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>2.06452 -0 0 1.4e-05 -0.022013 0</acceleration>
-          <wrench>2.06452 -0 0 0 -0 0</wrench>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='Rebar_clone'>
-        <pose>0.117632 -0.713055 0.019459 0.000486 0.000436 -1.1e-05</pose>
+        <pose>0.117632 -0.713055 0.019459 0.000487 0.000436 -1.1e-05</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
-          <pose>0.117632 -0.713055 0.019459 0.932772 1.57019 0.932761</pose>
+          <pose>0.117632 -0.713055 0.019459 0.933741 1.57019 0.93373</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-2.06452 2.4e-05 0 -0.001167 0.022013 -0</acceleration>
-          <wrench>-2.06452 2.4e-05 0 0 -0 0</wrench>
+          <acceleration>-2.06452 2.3e-05 -0 -0.001114 0.022013 0</acceleration>
+          <wrench>-2.06452 2.3e-05 -0 0 -0 0</wrench>
         </link>
       </model>
       <model name='Rebar_clone_0'>
-        <pose>0.105314 -0.383399 0.019459 0 0.001157 0</pose>
+        <pose>0.105314 -0.383399 0.019459 0 0.001153 0</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
           <pose>0.105314 -0.383399 0.019459 3.14159 1.57044 3.14159</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>2.06452 0 0 0 -0.022013 0</acceleration>
-          <wrench>2.06452 0 0 0 -0 0</wrench>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='Rebar_clone_0_clone'>
-        <pose>0.102907 -0.059179 0.019459 0 0.001157 0</pose>
+        <pose>0.102907 -0.059179 0.019459 0 0.001153 0</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
           <pose>0.102907 -0.059179 0.019459 3.14159 1.57044 3.14159</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>2.06452 0 0 0 -0.022013 0</acceleration>
-          <wrench>2.06452 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='Rebar_clone_0_clone_0'>
-        <pose>0.097843 0.29873 0.019459 0 0.001157 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link_0'>
-          <pose>0.097843 0.29873 0.019459 3.14159 1.57044 3.14159</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>2.06452 0 0 0 -0.022013 0</acceleration>
-          <wrench>2.06452 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='Rebar_clone_0_clone_1'>
-        <pose>0.103735 0.567828 0.019459 0 0.001157 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link_0'>
-          <pose>0.103735 0.567828 0.019459 3.14159 1.57044 3.14159</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>2.06452 0 0 0 -0.022013 0</acceleration>
-          <wrench>2.06452 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='Rebar_clone_0_clone_2'>
-        <pose>0.09603 0.848936 0.019459 0 0.001157 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link_0'>
-          <pose>0.09603 0.848936 0.019459 3.14159 1.57044 3.14159</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>2.06452 0 0 0 -0.022013 0</acceleration>
-          <wrench>2.06452 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='Rebar_clone_0_clone_3'>
-        <pose>0.112953 1.12585 0.019459 0.000848 0.001157 -1.5e-05</pose>
-        <scale>1 1 1</scale>
-        <link name='link_0'>
-          <pose>0.112953 1.12585 0.019459 1.97287 1.56987 1.97285</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>2.06452 -3.3e-05 0 0.001603 -0.022013 -0</acceleration>
-          <wrench>2.06452 -3.3e-05 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='Rebar_clone_0_clone_4'>
-        <pose>0.097285 1.42806 0.019459 0 0.001157 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link_0'>
-          <pose>0.097285 1.42806 0.019459 3.14159 1.57044 3.14159</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>2.06452 0 0 0 -0.022013 0</acceleration>
-          <wrench>2.06452 0 0 0 -0 0</wrench>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='Rebar_clone_0_clone_5'>
-        <pose>0.100655 1.71148 0.019459 0 0.001157 0</pose>
+        <pose>0.100655 1.71148 -1 0 0.001152 0</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
-          <pose>0.100655 1.71148 0.019459 3.14159 1.57044 3.14159</pose>
+          <pose>0.100655 1.71148 -1 3.14159 1.57044 3.14159</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>2.06452 0 0 0 -0.022013 0</acceleration>
-          <wrench>2.06452 0 0 0 -0 0</wrench>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='Rebar_clone_0_clone_6'>
-        <pose>0.110845 1.98674 0.019459 -0.001562 0.000436 0.000983</pose>
+        <pose>0.110845 1.98674 -1 -0.001566 0.000435 0.00098</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
-          <pose>0.110845 1.98674 0.019459 -1.34398 1.56919 -1.343</pose>
+          <pose>0.110845 1.98674 -1 -1.34403 1.56919 -1.34305</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-2.06451 -0.002031 0 0.098894 0.022061 0</acceleration>
-          <wrench>-2.06451 -0.002031 0 0 -0 0</wrench>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='Rebar_cross'>
-        <pose>-1.42412 0.482138 0.02 1e-06 -0 0</pose>
+        <pose>-1.42412 0.482138 0.02 1e-06 -0 -4e-06</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
           <pose>-1.42412 0.482138 0.02 1.5708 1.57 0.0008</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 -0 -0 0 -0 0</acceleration>
-          <wrench>0 -0 -0 0 -0 0</wrench>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='Rebar_cross_clone'>
-        <pose>1.63477 0.477366 0.02 -3e-06 0.003982 0.001729</pose>
+        <pose>1.63477 0.477366 0.02 -3e-06 0.003983 0.001736</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
           <pose>1.63477 0.477366 0.02 -1.5708 1.56761 -3.13906</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 -0 -0 0 -0 0</acceleration>
-          <wrench>0 -0 -0 0 -0 0</wrench>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='Rebar_vertial'>
@@ -939,7 +889,7 @@
       </light>
     </state>
     <model name='Rebar_clone_0'>
-      <static>true</static>   
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -1045,7 +995,7 @@
       <pose>0.10529 -0.383399 0.02 0 -0 0</pose>
     </model>
     <model name='Rebar_cross'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -1151,7 +1101,7 @@
       <pose>-3.49507 -0.99553 0.02 0 -0 0</pose>
     </model>
     <model name='Rebar_cross_clone'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -1257,7 +1207,7 @@
       <pose>1.6248 0.477363 0.02 0 -0 0</pose>
     </model>
     <model name='Rebar_clone_0_clone'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -1362,538 +1312,8 @@
       <allow_auto_disable>1</allow_auto_disable>
       <pose>0.102883 -0.059179 0.02 0 -0 0</pose>
     </model>
-    <model name='Rebar_clone_0_clone_0'>
-      <static>true</static>
-      <link name='link_0'>
-        <inertial>
-          <mass>1</mass>
-          <inertia>
-            <ixx>0.145833</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.145833</iyy>
-            <iyz>0</iyz>
-            <izz>0.125</izz>
-          </inertia>
-          <pose>0 0 0 0 -0 0</pose>
-        </inertial>
-        <pose>0 0 -0 0 1.57 0</pose>
-        <gravity>1</gravity>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <enable_wind>0</enable_wind>
-        <visual name='visual'>
-          <pose>0 0 0 0 -0 0</pose>
-          <geometry>
-            <cylinder>
-              <radius>0.02</radius>
-              <length>3</length>
-            </cylinder>
-          </geometry>
-          <material>
-            <lighting>1</lighting>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Grey</name>
-            </script>
-            <shader type='pixel'>
-              <normal_map>__default__</normal_map>
-            </shader>
-            <ambient>0.3 0.3 0.3 1</ambient>
-            <diffuse>0.7 0.7 0.7 1</diffuse>
-            <specular>0.01 0.01 0.01 1</specular>
-            <emissive>0 0 0 1</emissive>
-          </material>
-          <transparency>0</transparency>
-          <cast_shadows>1</cast_shadows>
-        </visual>
-        <collision name='collision'>
-          <laser_retro>0</laser_retro>
-          <max_contacts>10</max_contacts>
-          <pose>0 0 0 0 -0 0</pose>
-          <geometry>
-            <cylinder>
-              <radius>0.02</radius>
-              <length>3</length>
-            </cylinder>
-          </geometry>
-          <surface>
-            <friction>
-              <ode>
-                <mu>1</mu>
-                <mu2>1</mu2>
-                <fdir1>0 0 0</fdir1>
-                <slip1>0</slip1>
-                <slip2>0</slip2>
-              </ode>
-              <torsional>
-                <coefficient>1</coefficient>
-                <patch_radius>0</patch_radius>
-                <surface_radius>0</surface_radius>
-                <use_patch_radius>1</use_patch_radius>
-                <ode>
-                  <slip>0</slip>
-                </ode>
-              </torsional>
-            </friction>
-            <bounce>
-              <restitution_coefficient>0</restitution_coefficient>
-              <threshold>1e+06</threshold>
-            </bounce>
-            <contact>
-              <collide_without_contact>0</collide_without_contact>
-              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
-              <collide_bitmask>1</collide_bitmask>
-              <ode>
-                <soft_cfm>0</soft_cfm>
-                <soft_erp>0.2</soft_erp>
-                <kp>1e+13</kp>
-                <kd>1</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0</min_depth>
-              </ode>
-              <bullet>
-                <split_impulse>1</split_impulse>
-                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
-                <soft_cfm>0</soft_cfm>
-                <soft_erp>0.2</soft_erp>
-                <kp>1e+13</kp>
-                <kd>1</kd>
-              </bullet>
-            </contact>
-          </surface>
-        </collision>
-      </link>
-      <static>0</static>
-      <allow_auto_disable>1</allow_auto_disable>
-      <pose>0.097819 0.29873 0.02 0 -0 0</pose>
-    </model>
-    <model name='Rebar_clone_0_clone_1'>
-      <static>true</static>
-      <link name='link_0'>
-        <inertial>
-          <mass>1</mass>
-          <inertia>
-            <ixx>0.145833</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.145833</iyy>
-            <iyz>0</iyz>
-            <izz>0.125</izz>
-          </inertia>
-          <pose>0 0 0 0 -0 0</pose>
-        </inertial>
-        <pose>0 0 -0 0 1.57 0</pose>
-        <gravity>1</gravity>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <enable_wind>0</enable_wind>
-        <visual name='visual'>
-          <pose>0 0 0 0 -0 0</pose>
-          <geometry>
-            <cylinder>
-              <radius>0.02</radius>
-              <length>3</length>
-            </cylinder>
-          </geometry>
-          <material>
-            <lighting>1</lighting>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Grey</name>
-            </script>
-            <shader type='pixel'>
-              <normal_map>__default__</normal_map>
-            </shader>
-            <ambient>0.3 0.3 0.3 1</ambient>
-            <diffuse>0.7 0.7 0.7 1</diffuse>
-            <specular>0.01 0.01 0.01 1</specular>
-            <emissive>0 0 0 1</emissive>
-          </material>
-          <transparency>0</transparency>
-          <cast_shadows>1</cast_shadows>
-        </visual>
-        <collision name='collision'>
-          <laser_retro>0</laser_retro>
-          <max_contacts>10</max_contacts>
-          <pose>0 0 0 0 -0 0</pose>
-          <geometry>
-            <cylinder>
-              <radius>0.02</radius>
-              <length>3</length>
-            </cylinder>
-          </geometry>
-          <surface>
-            <friction>
-              <ode>
-                <mu>1</mu>
-                <mu2>1</mu2>
-                <fdir1>0 0 0</fdir1>
-                <slip1>0</slip1>
-                <slip2>0</slip2>
-              </ode>
-              <torsional>
-                <coefficient>1</coefficient>
-                <patch_radius>0</patch_radius>
-                <surface_radius>0</surface_radius>
-                <use_patch_radius>1</use_patch_radius>
-                <ode>
-                  <slip>0</slip>
-                </ode>
-              </torsional>
-            </friction>
-            <bounce>
-              <restitution_coefficient>0</restitution_coefficient>
-              <threshold>1e+06</threshold>
-            </bounce>
-            <contact>
-              <collide_without_contact>0</collide_without_contact>
-              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
-              <collide_bitmask>1</collide_bitmask>
-              <ode>
-                <soft_cfm>0</soft_cfm>
-                <soft_erp>0.2</soft_erp>
-                <kp>1e+13</kp>
-                <kd>1</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0</min_depth>
-              </ode>
-              <bullet>
-                <split_impulse>1</split_impulse>
-                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
-                <soft_cfm>0</soft_cfm>
-                <soft_erp>0.2</soft_erp>
-                <kp>1e+13</kp>
-                <kd>1</kd>
-              </bullet>
-            </contact>
-          </surface>
-        </collision>
-      </link>
-      <static>0</static>
-      <allow_auto_disable>1</allow_auto_disable>
-      <pose>0.103711 0.567828 0.02 0 -0 0</pose>
-    </model>
-    <model name='Rebar_clone_0_clone_2'>
-      <static>true</static>
-      <link name='link_0'>
-        <inertial>
-          <mass>1</mass>
-          <inertia>
-            <ixx>0.145833</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.145833</iyy>
-            <iyz>0</iyz>
-            <izz>0.125</izz>
-          </inertia>
-          <pose>0 0 0 0 -0 0</pose>
-        </inertial>
-        <pose>0 0 -0 0 1.57 0</pose>
-        <gravity>1</gravity>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <enable_wind>0</enable_wind>
-        <visual name='visual'>
-          <pose>0 0 0 0 -0 0</pose>
-          <geometry>
-            <cylinder>
-              <radius>0.02</radius>
-              <length>3</length>
-            </cylinder>
-          </geometry>
-          <material>
-            <lighting>1</lighting>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Grey</name>
-            </script>
-            <shader type='pixel'>
-              <normal_map>__default__</normal_map>
-            </shader>
-            <ambient>0.3 0.3 0.3 1</ambient>
-            <diffuse>0.7 0.7 0.7 1</diffuse>
-            <specular>0.01 0.01 0.01 1</specular>
-            <emissive>0 0 0 1</emissive>
-          </material>
-          <transparency>0</transparency>
-          <cast_shadows>1</cast_shadows>
-        </visual>
-        <collision name='collision'>
-          <laser_retro>0</laser_retro>
-          <max_contacts>10</max_contacts>
-          <pose>0 0 0 0 -0 0</pose>
-          <geometry>
-            <cylinder>
-              <radius>0.02</radius>
-              <length>3</length>
-            </cylinder>
-          </geometry>
-          <surface>
-            <friction>
-              <ode>
-                <mu>1</mu>
-                <mu2>1</mu2>
-                <fdir1>0 0 0</fdir1>
-                <slip1>0</slip1>
-                <slip2>0</slip2>
-              </ode>
-              <torsional>
-                <coefficient>1</coefficient>
-                <patch_radius>0</patch_radius>
-                <surface_radius>0</surface_radius>
-                <use_patch_radius>1</use_patch_radius>
-                <ode>
-                  <slip>0</slip>
-                </ode>
-              </torsional>
-            </friction>
-            <bounce>
-              <restitution_coefficient>0</restitution_coefficient>
-              <threshold>1e+06</threshold>
-            </bounce>
-            <contact>
-              <collide_without_contact>0</collide_without_contact>
-              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
-              <collide_bitmask>1</collide_bitmask>
-              <ode>
-                <soft_cfm>0</soft_cfm>
-                <soft_erp>0.2</soft_erp>
-                <kp>1e+13</kp>
-                <kd>1</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0</min_depth>
-              </ode>
-              <bullet>
-                <split_impulse>1</split_impulse>
-                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
-                <soft_cfm>0</soft_cfm>
-                <soft_erp>0.2</soft_erp>
-                <kp>1e+13</kp>
-                <kd>1</kd>
-              </bullet>
-            </contact>
-          </surface>
-        </collision>
-      </link>
-      <static>0</static>
-      <allow_auto_disable>1</allow_auto_disable>
-      <pose>0.096006 0.848936 0.02 0 -0 0</pose>
-    </model>
-    <model name='Rebar_clone_0_clone_3'>
-      <static>true</static>
-      <link name='link_0'>
-        <inertial>
-          <mass>1</mass>
-          <inertia>
-            <ixx>0.145833</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.145833</iyy>
-            <iyz>0</iyz>
-            <izz>0.125</izz>
-          </inertia>
-          <pose>0 0 0 0 -0 0</pose>
-        </inertial>
-        <pose>0 0 -0 0 1.57 0</pose>
-        <gravity>1</gravity>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <enable_wind>0</enable_wind>
-        <visual name='visual'>
-          <pose>0 0 0 0 -0 0</pose>
-          <geometry>
-            <cylinder>
-              <radius>0.02</radius>
-              <length>3</length>
-            </cylinder>
-          </geometry>
-          <material>
-            <lighting>1</lighting>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Grey</name>
-            </script>
-            <shader type='pixel'>
-              <normal_map>__default__</normal_map>
-            </shader>
-            <ambient>0.3 0.3 0.3 1</ambient>
-            <diffuse>0.7 0.7 0.7 1</diffuse>
-            <specular>0.01 0.01 0.01 1</specular>
-            <emissive>0 0 0 1</emissive>
-          </material>
-          <transparency>0</transparency>
-          <cast_shadows>1</cast_shadows>
-        </visual>
-        <collision name='collision'>
-          <laser_retro>0</laser_retro>
-          <max_contacts>10</max_contacts>
-          <pose>0 0 0 0 -0 0</pose>
-          <geometry>
-            <cylinder>
-              <radius>0.02</radius>
-              <length>3</length>
-            </cylinder>
-          </geometry>
-          <surface>
-            <friction>
-              <ode>
-                <mu>1</mu>
-                <mu2>1</mu2>
-                <fdir1>0 0 0</fdir1>
-                <slip1>0</slip1>
-                <slip2>0</slip2>
-              </ode>
-              <torsional>
-                <coefficient>1</coefficient>
-                <patch_radius>0</patch_radius>
-                <surface_radius>0</surface_radius>
-                <use_patch_radius>1</use_patch_radius>
-                <ode>
-                  <slip>0</slip>
-                </ode>
-              </torsional>
-            </friction>
-            <bounce>
-              <restitution_coefficient>0</restitution_coefficient>
-              <threshold>1e+06</threshold>
-            </bounce>
-            <contact>
-              <collide_without_contact>0</collide_without_contact>
-              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
-              <collide_bitmask>1</collide_bitmask>
-              <ode>
-                <soft_cfm>0</soft_cfm>
-                <soft_erp>0.2</soft_erp>
-                <kp>1e+13</kp>
-                <kd>1</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0</min_depth>
-              </ode>
-              <bullet>
-                <split_impulse>1</split_impulse>
-                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
-                <soft_cfm>0</soft_cfm>
-                <soft_erp>0.2</soft_erp>
-                <kp>1e+13</kp>
-                <kd>1</kd>
-              </bullet>
-            </contact>
-          </surface>
-        </collision>
-      </link>
-      <static>0</static>
-      <allow_auto_disable>1</allow_auto_disable>
-      <pose>0.113788 1.12589 0.02 0 -0 0</pose>
-    </model>
-    <model name='Rebar_clone_0_clone_4'>
-      <static>true</static>
-      <link name='link_0'>
-        <inertial>
-          <mass>1</mass>
-          <inertia>
-            <ixx>0.145833</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.145833</iyy>
-            <iyz>0</iyz>
-            <izz>0.125</izz>
-          </inertia>
-          <pose>0 0 0 0 -0 0</pose>
-        </inertial>
-        <pose>0 0 -0 0 1.57 0</pose>
-        <gravity>1</gravity>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <enable_wind>0</enable_wind>
-        <visual name='visual'>
-          <pose>0 0 0 0 -0 0</pose>
-          <geometry>
-            <cylinder>
-              <radius>0.02</radius>
-              <length>3</length>
-            </cylinder>
-          </geometry>
-          <material>
-            <lighting>1</lighting>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Grey</name>
-            </script>
-            <shader type='pixel'>
-              <normal_map>__default__</normal_map>
-            </shader>
-            <ambient>0.3 0.3 0.3 1</ambient>
-            <diffuse>0.7 0.7 0.7 1</diffuse>
-            <specular>0.01 0.01 0.01 1</specular>
-            <emissive>0 0 0 1</emissive>
-          </material>
-          <transparency>0</transparency>
-          <cast_shadows>1</cast_shadows>
-        </visual>
-        <collision name='collision'>
-          <laser_retro>0</laser_retro>
-          <max_contacts>10</max_contacts>
-          <pose>0 0 0 0 -0 0</pose>
-          <geometry>
-            <cylinder>
-              <radius>0.02</radius>
-              <length>3</length>
-            </cylinder>
-          </geometry>
-          <surface>
-            <friction>
-              <ode>
-                <mu>1</mu>
-                <mu2>1</mu2>
-                <fdir1>0 0 0</fdir1>
-                <slip1>0</slip1>
-                <slip2>0</slip2>
-              </ode>
-              <torsional>
-                <coefficient>1</coefficient>
-                <patch_radius>0</patch_radius>
-                <surface_radius>0</surface_radius>
-                <use_patch_radius>1</use_patch_radius>
-                <ode>
-                  <slip>0</slip>
-                </ode>
-              </torsional>
-            </friction>
-            <bounce>
-              <restitution_coefficient>0</restitution_coefficient>
-              <threshold>1e+06</threshold>
-            </bounce>
-            <contact>
-              <collide_without_contact>0</collide_without_contact>
-              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
-              <collide_bitmask>1</collide_bitmask>
-              <ode>
-                <soft_cfm>0</soft_cfm>
-                <soft_erp>0.2</soft_erp>
-                <kp>1e+13</kp>
-                <kd>1</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0</min_depth>
-              </ode>
-              <bullet>
-                <split_impulse>1</split_impulse>
-                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
-                <soft_cfm>0</soft_cfm>
-                <soft_erp>0.2</soft_erp>
-                <kp>1e+13</kp>
-                <kd>1</kd>
-              </bullet>
-            </contact>
-          </surface>
-        </collision>
-      </link>
-      <static>0</static>
-      <allow_auto_disable>1</allow_auto_disable>
-      <pose>0.097261 1.42806 0.02 0 -0 0</pose>
-    </model>
     <model name='Rebar_clone_0_clone_5'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -1999,7 +1419,7 @@
       <pose>0.100631 1.71148 0.02 0 -0 0</pose>
     </model>
     <model name='Rebar_clone_0_clone_6'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -2106,13 +1526,13 @@
     </model>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>-2.22217 2.9208 4.70569 0 1.10498 -0.696556</pose>
+        <pose>-4.86291 1.06408 2.84646 0 0.58098 0.059446</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
     </gui>
     <model name='Rebar_vertial'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -2218,7 +1638,7 @@
       <pose>2.38154 3.07011 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -2324,7 +1744,7 @@
       <pose>4 2 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_0'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -2430,7 +1850,7 @@
       <pose>1.69097 1.52613 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_1'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -2536,7 +1956,7 @@
       <pose>1.66538 1.31262 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_2'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -2642,7 +2062,7 @@
       <pose>1.71531 1.09533 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_3'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -2748,7 +2168,7 @@
       <pose>1.69149 0.827238 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_4'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -2854,7 +2274,7 @@
       <pose>1.67107 0.552466 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_5'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -2960,7 +2380,7 @@
       <pose>1.67747 0.296676 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_6'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -3066,7 +2486,7 @@
       <pose>1.6601 0.005686 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_7'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -3172,7 +2592,7 @@
       <pose>1.66849 -0.289541 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_8'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -3278,7 +2698,7 @@
       <pose>1.65702 -0.520808 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_9'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -3384,7 +2804,7 @@
       <pose>1.66956 -0.88423 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_10'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -3490,7 +2910,7 @@
       <pose>1.63653 -1.06079 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_11'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -3596,7 +3016,7 @@
       <pose>1.42083 -1.03127 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_12'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -3702,7 +3122,7 @@
       <pose>1.23842 -1.03293 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_13'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -3808,7 +3228,7 @@
       <pose>1 -1 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_14'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -3914,7 +3334,7 @@
       <pose>0.836852 -1.0403 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_15'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -4020,7 +3440,7 @@
       <pose>0.628636 -1.0348 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_16'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -4126,7 +3546,7 @@
       <pose>0.458174 -1.04732 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_17'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -4232,7 +3652,7 @@
       <pose>0.286191 -1.01631 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_18'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -4338,7 +3758,7 @@
       <pose>0.088342 -1.0291 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_19'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -4444,7 +3864,7 @@
       <pose>-0.098339 -1.00977 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_20'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -4550,7 +3970,7 @@
       <pose>-0.2552 -1.036 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_21'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -4656,7 +4076,7 @@
       <pose>-0.453698 -1.04244 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_22'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -4762,7 +4182,7 @@
       <pose>-0.586605 -1.04477 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_23'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -4868,7 +4288,7 @@
       <pose>-0.794408 -1.04841 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_24'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -4974,7 +4394,7 @@
       <pose>-0.962909 -1.0295 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_25'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -5080,7 +4500,7 @@
       <pose>-1.19146 -1.03655 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_26'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -5186,7 +4606,7 @@
       <pose>-1.4229 -1.02769 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_27'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -5292,7 +4712,7 @@
       <pose>-1.46033 -0.725347 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_28'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -5398,7 +4818,7 @@
       <pose>-1.44844 -0.426685 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_29'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -5504,7 +4924,7 @@
       <pose>-1.45536 -0.070402 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_30'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -5610,7 +5030,7 @@
       <pose>-1.43884 0.318231 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_31'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -5716,7 +5136,7 @@
       <pose>-1.45046 0.569968 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_32'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -5822,7 +5242,7 @@
       <pose>-1.45203 0.838209 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_33'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -5928,7 +5348,7 @@
       <pose>-1.43156 1.11767 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_34'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -6034,7 +5454,7 @@
       <pose>-1.44278 1.42946 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_35'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -6140,7 +5560,7 @@
       <pose>-1.43915 1.69383 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_36'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -6246,7 +5666,7 @@
       <pose>-1.40511 1.98021 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_37'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -6352,7 +5772,7 @@
       <pose>-1.22904 2.02368 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_38'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -6458,7 +5878,7 @@
       <pose>-1.01952 2.01716 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_39'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -6564,7 +5984,7 @@
       <pose>-0.76674 2.02313 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_40'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -6670,7 +6090,7 @@
       <pose>-0.434795 2.01458 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_41'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -6776,7 +6196,7 @@
       <pose>-0.132139 2.02398 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_42'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -6882,7 +6302,7 @@
       <pose>0.160042 2.03055 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_43'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -6988,7 +6408,7 @@
       <pose>0.506407 2.01722 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_44'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -7094,7 +6514,7 @@
       <pose>0.821421 2.02084 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_45'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>
@@ -7200,7 +6620,7 @@
       <pose>1.41661 2.02065 0.019459 -0.001562 0.001157 0.000983</pose>
     </model>
     <model name='Rebar_vertial_clone_46'>
-      <static>true</static>
+      <static>1</static>
       <link name='link_0'>
         <inertial>
           <mass>1</mass>

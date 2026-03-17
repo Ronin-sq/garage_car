@@ -1,0 +1,29 @@
+<!-- 
+  纯循迹行为树 (Pure Path Following Behavior Tree)
+  特点：完全砍掉全局规划器，不依赖 map 坐标系，纯靠外部输入的 path 运行，遇到障碍物执行后退。
+-->
+<root main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <RecoveryNode number_of_retries="3" name="FollowPathRecovery">
+      
+      <!-- 正常执行：直接跟随外部传入的路径 -->
+      <FollowPath path="{path}" controller_id="FollowPath"/>
+
+      <!-- 异常恢复：如果跟随失败（比如遇到死路），执行这里的动作 -->
+      <ReactiveFallback name="RecoveryFallback">
+        <GoalUpdated/>
+        <RoundRobin name="RecoveryActions">
+          <Sequence name="ClearingActions">
+            <!-- 只清除局部代价地图，完全屏蔽全局代价地图 -->
+            <ClearEntireCostmap name="ClearLocalCostmap-Subtree" service_name="local_costmap/clear_entirely_local_costmap"/>
+          </Sequence>
+          <!-- 停下等5秒看障碍物会不会移开 -->
+          <Wait wait_duration="5"/>
+          <!-- 密集场景安全的后退动作 (只退 15 厘米) -->
+          <BackUp backup_dist="0.15" backup_speed="0.05"/>
+        </RoundRobin>
+      </ReactiveFallback>
+
+    </RecoveryNode>
+  </BehaviorTree>
+</root>
