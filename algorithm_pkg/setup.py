@@ -1,4 +1,6 @@
 from setuptools import find_packages, setup
+import os
+import glob
 
 package_name = 'algorithm_pkg'
 
@@ -10,6 +12,8 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        (os.path.join('share', package_name, 'launch'), glob.glob(os.path.join('launch', '*launch.[pxy][yma]*'))),
+
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -25,6 +29,8 @@ setup(
     entry_points={
         'console_scripts': [
             'scan_node = algorithm_pkg.scan_node:main',
+            'action_server = algorithm_pkg.action_server:main',
+            'action_client = algorithm_pkg.action_client:main',
             'nav_path_node = algorithm_pkg.nav_path_node:main',
             'rebar_path_executor = algorithm_pkg.rebar_path_executor:main',
         ],

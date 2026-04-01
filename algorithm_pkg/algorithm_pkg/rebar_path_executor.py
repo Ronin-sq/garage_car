@@ -43,7 +43,6 @@ class RebarTaskExecutor(Node):
             self.get_logger().error('Nav2 拒绝了路径任务（可能是起点被认为在障碍物上）')
             return
         # self.get_logger().info('小车已接受指令，开始全覆盖作业！')
-
 def main(args=None):
     rclpy.init(args=args)
     executor = RebarTaskExecutor()

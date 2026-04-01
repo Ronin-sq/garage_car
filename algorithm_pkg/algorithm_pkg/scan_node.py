@@ -7,8 +7,8 @@ import numpy as np
 import alphashape  # 核心算法库
 from sklearn.cluster import DBSCAN  # 聚类算法库
 from shapely.geometry import LineString, Polygon
-from nav2_msgs.action import NavigateToPose
-from rclpy.action import ActionServer
+# from nav2_msgs.action import NavigateToPose
+# from rclpy.action import ActionServer
 
 
 
@@ -27,6 +27,21 @@ class SparseBorderExtractor(Node):
         self.marker_pub = self.create_publisher(Marker, 'floor_border_marker', 10)
         self.clean_points_pub = self.create_publisher(Marker, 'cleaned_rebar_centers', 10)
         self.path_points_pub = self.create_publisher(Marker, 'path_points', 10)
+        
+        # 实验：SOR滤波器参数
+        self.use_sor_filter = False  # 设置为True启用SOR滤波器
+        self.sor_mean_k = 5  # 用于计算平均距离的点数量（减小以提高灵敏度）
+        self.sor_std_dev_mul = 2.5  # 标准差乘数阈值（增大使阈值更严格：均值 + 2倍标准差）
+        
+        # 实验：飞点注入参数（用于测试SOR滤波器效果）
+        self.inject_outliers = False  # 设置为True启用飞点注入
+        self.outlier_count = 10  # 每帧注入的飞点数量
+        self.outlier_min_range = 0.05 # 飞点最小距离（设为极小值使飞点更明显）
+        self.outlier_max_range = 12.0  # 飞点最大距离（设为极大值使飞点更明显）
+        
+        # 初始化随机种子，确保飞点注入位置固定
+        np.random.seed(42)
+        
         # 算法参数
         self.alpha = 0.1  # Alpha值越小越接近凸包，越大越紧贴点云。需根据钢筋间距调试。
         self.get_logger().info("稀疏边界提取节点已启动...")
@@ -34,6 +49,96 @@ class SparseBorderExtractor(Node):
 
 
         
+
+    def sor_filter(self, ranges, angles):
+        """
+        SOR (Statistical Outlier Removal) 滤波器 - 二维版本
+        
+        对于每个点，计算其在二维空间中的k个最近邻的平均欧几里得距离。
+        使用全局统计阈值：所有点邻居距离的均值 + std_dev_mul * 标准差。
+        如果某点的邻居平均距离超过阈值，则为离群点。
+        
+        参数:
+            ranges: 距离数组
+            angles: 角度数组
+        
+        返回:
+            过滤后的有效点掩码
+        """
+        k = self.sor_mean_k
+        std_dev_mul = self.sor_std_dev_mul
+        
+        n = len(ranges)
+        if n < k:
+            return np.ones(n, dtype=bool)
+        
+        # 先将极坐标转换为笛卡尔坐标 (x, y)
+        x = ranges * np.cos(angles)
+        y = ranges * np.sin(angles)
+        points = np.column_stack((x, y))
+        
+        # 第一步：计算每个点到k个最近邻的平均距离
+        mean_distances = np.zeros(n)
+        for i in range(n):
+            if not np.isfinite(ranges[i]):
+                mean_distances[i] = np.inf
+                continue
+            
+            # 计算该点到所有其他点的二维欧几里得距离
+            dists = np.sqrt((points[:, 0] - points[i, 0])**2 + (points[:, 1] - points[i, 1])**2)
+            dists[i] = np.inf  # 排除自身
+            
+            # 获取k个最近邻的索引
+            k_indices = np.argsort(dists)[:k]
+            if len(k_indices) < k:
+                mean_distances[i] = np.inf
+            else:
+                mean_distances[i] = np.mean(dists[k_indices])
+        
+        # 第二步：计算全局阈值（基于所有点的邻居平均距离）
+        valid_distances = mean_distances[np.isfinite(mean_distances)]
+        if len(valid_distances) == 0:
+            return np.ones(n, dtype=bool)
+        
+        global_mean = np.mean(valid_distances)
+        global_std = np.std(valid_distances)
+        threshold = global_mean + std_dev_mul * global_std
+        
+        # 第三步：标记超过阈值的点为离群点
+        valid_mask = mean_distances <= threshold
+        
+        return valid_mask
+
+    def inject_outlier_points(self, ranges, angles, angle_min, angle_max):
+        """
+        人为注入飞点（离群点）用于测试SOR滤波器效果
+        
+        在原始点云中注入固定位置的飞点，确保每帧测试的一致性。
+        
+        参数:
+            ranges: 原始距离数组
+            angles: 对应角度数组
+            angle_min: 雷达扫描最小角度
+            angle_max: 雷达扫描最大角度
+        
+        返回:
+            注入了飞点的新 ranges 和 angles 数组
+        """
+        new_ranges = list(ranges)
+        new_angles = list(angles)
+        
+        # 预定义固定的飞点位置（角度和距离）
+        # 这些位置在不同帧中保持一致，便于对比SOR滤波效果
+        np.random.seed(42)  # 固定随机种子，确保每帧生成相同位置
+        for _ in range(self.outlier_count):
+            # 随机角度（在有效范围内）
+            angle = np.random.uniform(angle_min, angle_max)
+            # 随机距离（在指定范围内，但与正常点云保持一定距离差异）
+            distance = np.random.uniform(self.outlier_min_range, self.outlier_max_range)
+            new_ranges.append(distance)
+            new_angles.append(angle)
+        
+        return np.array(new_ranges), np.array(new_angles)
 
     def scan_callback(self, msg):
         # 1. 极坐标转直角坐标 (x, y)
@@ -44,7 +149,46 @@ class SparseBorderExtractor(Node):
         valid_mask = np.isfinite(ranges) & (ranges > msg.range_min) & (ranges < msg.range_max)
         if not np.any(valid_mask):
             return
-
+        
+        # 【实验】注入飞点（在基础过滤之后、SOR之前）
+        if self.inject_outliers:
+            filtered_ranges = ranges[valid_mask]
+            filtered_angles = angles[valid_mask]
+            injected_ranges, injected_angles = self.inject_outlier_points(
+                filtered_ranges, filtered_angles, msg.angle_min, msg.angle_max)
+            
+            # 创建新的有效掩码
+            injected_valid_mask = (injected_ranges > msg.range_min) & (injected_ranges < msg.range_max) & np.isfinite(injected_ranges)
+            self.get_logger().info(f"Injected {self.outlier_count} outlier points (total valid: {np.sum(injected_valid_mask)})")
+            
+            # 更新 ranges 和 angles
+            valid_mask = injected_valid_mask
+            angles = injected_angles
+            ranges = injected_ranges
+            if not np.any(valid_mask):
+                return
+        
+        # 【实验】应用SOR滤波器过滤离群点
+        if self.use_sor_filter:
+            filtered_ranges = ranges[valid_mask]
+            filtered_angles = angles[valid_mask]
+            sor_mask = self.sor_filter(filtered_ranges, filtered_angles)
+            
+            # 统计过滤结果
+            removed_count = np.sum(~sor_mask)
+            total_count = len(sor_mask)
+            self.get_logger().info(f"SOR Filter: removed {removed_count}/{total_count} outlier points (threshold: mean + {self.sor_std_dev_mul} * std)")
+            
+            # 应用过滤掩码
+            valid_mask_indices = np.where(valid_mask)[0]
+            final_valid = np.zeros(len(ranges), dtype=bool)
+            for i, idx in enumerate(valid_mask_indices):
+                final_valid[idx] = sor_mask[i]
+            valid_mask = final_valid
+            
+            if not np.any(valid_mask):
+                return
+        
         x = ranges[valid_mask] * np.cos(angles[valid_mask])
         y = ranges[valid_mask] * np.sin(angles[valid_mask])
         points = np.column_stack((x, y))
@@ -208,7 +352,7 @@ class SparseBorderExtractor(Node):
         direction = 1
         
         while current_y < max_y:
-            vertical_line = LineString([(min_x+0.2, current_y), (max_x-0.2, current_y)])
+            vertical_line = LineString([(min_x+0.35, current_y), (max_x-0.35, current_y)])
             intersection = vertical_line.intersection(polygon)
             # print(f"ronin login : scan once at y={current_y}")
             if not intersection.is_empty:
@@ -249,8 +393,9 @@ class SparseBorderExtractor(Node):
         #     y = start_point[1]
         #     point.append([x, y])
         # point.append(end_point)
-        # 填充点数据
-        for p in path_points:
+        # 填充点数据（反转顺序）
+        reversed_path = list(reversed(path_points))
+        for p in reversed_path:
         # for p in point:
             point_msg = Point()
             point_msg.x = float(p[0])
