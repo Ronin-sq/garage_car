@@ -43,7 +43,7 @@ class SparseBorderExtractor(Node):
         np.random.seed(42)
         
         # 算法参数
-        self.alpha = 0.1  # Alpha值越小越接近凸包，越大越紧贴点云。需根据钢筋间距调试。
+        self.alpha = 0.0  # Alpha值越小越接近凸包，越大越紧贴点云。需根据钢筋间距调试。
         self.get_logger().info("稀疏边界提取节点已启动...")
         # self._action_client = ActionServer(self, NavigateToPose, 'point',self.execute_callback)
 
@@ -111,7 +111,7 @@ class SparseBorderExtractor(Node):
 
     def inject_outlier_points(self, ranges, angles, angle_min, angle_max):
         """
-        人为注入飞点（离群点）用于测试SOR滤波器效果
+        注入飞点（离群点）用于测试SOR滤波器效果
         
         在原始点云中注入固定位置的飞点，确保每帧测试的一致性。
         

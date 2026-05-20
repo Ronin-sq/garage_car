@@ -52,11 +52,20 @@ def generate_launch_description():
         output="screen",
     )
 
+    ekf_node = Node(
+        package='robot_localization',
+        executable='ekf_node',
+        name='ekf_filter_node',
+        output='screen',
+        parameters=[os.path.join(package_path, 'config', 'ekf.yaml')]
+    )
+
     return launch.LaunchDescription([
         robot_state_publisher_node,
         action_launch_gazebo,
         spawn_entity_node,
         rviz_node,
+        ekf_node,
         launch.actions.RegisterEventHandler(
             event_handler=launch.event_handlers.OnProcessExit(
                 target_action=spawn_entity_node,

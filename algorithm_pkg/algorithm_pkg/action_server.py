@@ -16,8 +16,8 @@ class PDActionServer(Node):
         # 1. 速度发布者
         self.cmd_vel_pub = self.create_publisher(Twist, '/cmd_vel', 10, callback_group=self.group)
         
-        # 2. 里程计订阅者
-        self.odom_sub = self.create_subscription(Odometry, '/odom', self.odom_callback, 10, callback_group=self.group)
+        # 2. 里程计订阅者 (使用 EKF 融合后的里程计)
+        self.odom_sub = self.create_subscription(Odometry, '/odometry/filtered', self.odom_callback, 10, callback_group=self.group)
         
         # 3. Action Server
         self._action_server = ActionServer(
@@ -75,18 +75,23 @@ class PDActionServer(Node):
             dx = target_x - self.curr_x
             dy = target_y - self.curr_y
             self.get_logger().info(f'current position: ({self.curr_x:.2f}, {self.curr_y:.2f}), target: ({target_x:.2f}, {target_y:.2f}), error: ({dx:.2f}, {dy:.2f})')
-            distance_error = math.sqrt(dx**2 + dy**2)
+            # distance_error = math.sqrt(dx**2 + dy**2)
+            distance_error = math.sqrt(dx**2) # 避免除零错误
             
             # 2. 如果到达目标点
             if distance_error < 0.1:
                 cmd = Twist() # 停止机器人
                 self.cmd_vel_pub.publish(cmd)
-                self.get_logger().info('Goal reached, now rotating 90 degrees...')
+                # 到达目标后，只有需要跨行（y_error较大）时才执行旋转和换行宏动作
+                if abs(y_error) > 0.01:
+                    self.get_logger().info('Goal reached, now stabilizing before rotation...')
+                    time.sleep(0.5)  # 停稳半秒钟，让因为急停造成的底盘晃动消除
+                    self.rotate_90_degrees(flag, y_error)
+                else:
+                    self.get_logger().info('Goal reached (intermediate point), skipping rotation.')
                 
-                # 到达目标后旋转90度
-                self.rotate_90_degrees(flag, y_error)
-                
-                self.get_logger().info('Rotation completed.')
+                self.get_logger().info('Rotation completed. Stabilizing...')
+                time.sleep(5.0)  # 旋转结束后也停稳半秒
                 break
             
             # 3. PD 控制线速度 (Linear)
@@ -104,7 +109,7 @@ class PDActionServer(Node):
             # 5. 发布速度
             cmd = Twist()
             cmd.linear.x = min(v, 0.05) # 限制最大线速度
-            cmd.angular.z = 0.0 # 先不转向，保持简单
+            cmd.angular.z = 0.0 # 启用转向控制，限制最大角速度
             self.cmd_vel_pub.publish(cmd)
             
             # 6. 发布反馈
@@ -131,15 +136,18 @@ class PDActionServer(Node):
         initial_yaw = self.curr_yaw
         
         # 确定旋转方向
-        if flag % 2 == 0:  # 偶数次目标点，向左转
+        # 由于 client 的 flag 会对所有路径点递增（包含中间点），我们通过 (flag + 1)//2 计算实际的换行次数
+        line_index = (flag + 1) // 2
+        if line_index % 2 == 0:  # 偶数次换行，向左转
             direction = 1  # 正向
-        else:  # 奇数次目标点，向右转
+        else:  # 奇数次换行，向右转
             direction = -1  # 反向
         
         # P控制器参数
         kp = 1.5
-        max_angular_vel = 0.05  # 最大角速度 rad/s
-        angle_threshold = 0.01  # 停止阈值（约1.1度）
+        max_angular_vel = 0.5  # 最大角速度 rad/s (提高以加快旋转)
+        min_angular_vel = 0.1  # 保证能克服静摩擦力且平滑的最小角速度 (提高以防止卡死)
+        angle_threshold = 0.02  # 停止阈值 (略微放宽到约1度)
         
         # 计算目标最终角度
         target_yaw = initial_yaw + direction * target_rotation
@@ -169,8 +177,11 @@ class PDActionServer(Node):
             # P控制计算角速度
             angular_vel = kp * remaining_angle
             
-            # 限制最大角速度
-            angular_vel = max(-max_angular_vel, min(max_angular_vel, angular_vel))
+            # 限制最大角速度与最小角速度
+            if angular_vel > 0:
+                angular_vel = max(min_angular_vel, min(max_angular_vel, angular_vel))
+            else:
+                angular_vel = min(-min_angular_vel, max(-max_angular_vel, angular_vel))
             
             cmd = Twist()
             cmd.linear.x = 0.0
@@ -185,10 +196,11 @@ class PDActionServer(Node):
 
         # ===== Y方向移动 =====
         # 使用反馈控制移动Y方向
+        y_error = -0.1
         if abs(y_error) > 0.01:  # 只有当有Y方向移动时才执行
-            move_speed = 0.05
+            move_speed = 0.15
             target_y = self.curr_y + y_error
-            distance_threshold = 0.02
+            distance_threshold = 0.01
             
             self.get_logger().info(f'Starting Y movement: current_y={self.curr_y:.3f}, target_y={target_y:.3f}, distance={abs(y_error):.3f}')
             
@@ -206,8 +218,9 @@ class PDActionServer(Node):
                 
                 # P控制
                 cmd = Twist()
-                # cmd.linear.x = move_speed if remaining_y > 0 else -move_speed
-                cmd.linear.x = abs(move_speed)
+                # 根据当前朝向和剩余的Y距离决定是前进还是后退
+                direction_multiplier = 1.0 if (remaining_y * math.sin(self.curr_yaw)) >= 0 else -1.0
+                cmd.linear.x = move_speed * direction_multiplier
                 cmd.angular.z = 0.0
                 self.cmd_vel_pub.publish(cmd)
                 self.get_logger().info(f'Moving Y... remaining={remaining_y:.3f}')
@@ -221,8 +234,8 @@ class PDActionServer(Node):
         if abs(y_error) > 0.01:  # 只有执行了Y方向移动才需要第三次旋转
             target_rotation = math.pi / 2
             initial_yaw_after_y = self.curr_yaw
-            # 反转旋转方向
-            reverse_direction = direction  # 与第一次旋转方向相反
+            
+            reverse_direction = direction  # 与第一次旋转方向相同
             
             target_yaw_final = initial_yaw_after_y + reverse_direction * target_rotation
             target_yaw_final = math.atan2(math.sin(target_yaw_final), math.cos(target_yaw_final))
@@ -243,7 +256,10 @@ class PDActionServer(Node):
                     break
                 
                 angular_vel = kp * remaining_angle
-                angular_vel = max(-max_angular_vel, min(max_angular_vel, angular_vel))
+                if angular_vel > 0:
+                    angular_vel = max(min_angular_vel, min(max_angular_vel, angular_vel))
+                else:
+                    angular_vel = min(-min_angular_vel, max(-max_angular_vel, angular_vel))
                 
                 cmd = Twist()
                 cmd.linear.x = 0.0

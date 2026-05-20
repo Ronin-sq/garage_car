@@ -36,6 +36,10 @@ class SequentialActionClient(Node):
         self.is_ready = False
         self.get_logger().info('New point received. Locking subscription...')
 
+        if self.flag + 1 >= len(msg.points):
+            self.get_logger().info('All points processed. Mission Complete!')
+            return
+
         target_point_msg = msg.points[self.flag]
         target_next_point_msg = msg.points[self.flag+1]
         
@@ -83,7 +87,7 @@ class SequentialActionClient(Node):
         # --- 关键逻辑 3: 任务完成，重新开门 ---
         self.is_ready = True
         if result.success:
-            self.flag = self.flag + 1
+            self.flag = self.flag + 2
         self.get_logger().info('--- READY FOR NEXT GOAL ---')
 
     def feedback_callback(self, feedback_msg):

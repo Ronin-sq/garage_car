@@ -6,7 +6,6 @@ import os
 from launch.actions import TimerAction
 # from launch.substitutions import Command
 
-
 def generate_launch_description():
     package_path = get_package_share_directory("robot_pkg")
     rebar_sim_launch = launch.actions.IncludeLaunchDescription(
@@ -14,7 +13,6 @@ def generate_launch_description():
             [package_path, '/launch', '/rebar_sim.launch.py']
         ),)
     
-
     scan_node = Node(
         package='algorithm_pkg',
         executable='scan_node',
@@ -28,8 +26,6 @@ def generate_launch_description():
         name='nav_path_node',
         output='screen',
     )
-
-
 
     action_client_node = Node(
         package='algorithm_pkg',
